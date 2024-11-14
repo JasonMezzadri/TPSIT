@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tre Bottoni con Funzioni Diverse</title>
+    <style>
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4c7faf;
+            color: white;
+            border-radius: 5px;
+            
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>JS1</h1>
+
+    <button onclick="funzione1()">Come ti chiami?</button>
+    <button onclick="funzione2()">Che classe fai?</button>
+    <button onclick="funzione3()">Calcola la somma di due numeri</button>
+
+    <script>
+
+        function funzione1() {
+            alert("Jason Mezzadri");
+        }
+
+        function funzione2() {
+            alert("3A INFO");
+        }
+
+        function funzione3() {
+            let num1 = 5;
+            let num2 = 7;
+            let somma = num1 + num2;
+            alert("La somma di " + num1 + " e " + num2 + " è: " + somma);
+        }
+    </script>
+
+</body>
+</html>
