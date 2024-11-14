@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Script</title>
+    <style>
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4c7faf;
+            color: white;
+            border-radius: 5px;
+            
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>JS1</h1>
+
+    <button onclick="funzione1()">Come ti chiami?</button>
+    <button onclick="funzione2()">Che classe fai?</button>
+    <button onclick="funzione3()">Calcola la somma di due numeri</button>
+
+    <script>
+
+        function funzione1() {
+            alert("Jason Mezzadri");
+        }
+
+        function funzione2() {
+            alert("3A INFO");
+        }
+
+        function funzione3() {
+            let num1 = 5;
+            let num2 = 7;
+            let somma = num1 + num2;
+            alert("La somma di " + num1 + " e " + num2 + " è: " + somma);
+        }
+    </script>
+
+</body>
+</html>
+
+    <style>
+        #MyButton1 {
+            display: inline-block;
+            padding: 15px 25px;
+            font-size: 24px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            outline: none;
+            color: #fff;
+            background-color: #0415aa;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 9px #01aaf8;
+        }
+    </style>
+</head>
+<body> 
+<h1>JS2</h1>  
+<input type="" name="" id="MioInput1" >
+<button id=MyButton1 onclick="aprifinestra()">Cliccami</button>
+<dv>
+    <p id="OUT1"><b>Risultato: </b></p>
+</dv>
+<script>
+    function aprifinestra(){
+ let i=document.getElementById("MioInput1").value
+    alert(" " + i);
+
+    
+    document.getElementById("OUT1").innerHTML+=i
+    }
+</script>
+</body>
+</html>
+
+
+
+<style>
+    #MyButton1 {
+        display: inline-block;
+        padding: 15px 25px;
+        font-size: 24px;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        outline: none;
+        color: #fff;
+        background-color: #0415aa;
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 9px #01aaf8;
+    }
+</style>
+</head>
+<body>
+
+<h1>JS3</h1>  
+<p id="testo1"><b>Albert Einstein:</b> "La scienza senza religione è zoppa, la religione senza scienza è cieca."</p> 
+  <button onclick="nascondiTesto1()">Nascondi </button> 
+
+<script>
+
+function nascondiTesto1() 
+{
+const testo = document.getElementById("testo1");
+testo.style.display = "none"; 
+} 
+</script>
+</body>
+</html>
+
+
+<style>
+    #MyButton2 {
+        display: inline-block;
+        padding: 15px 25px;
+        font-size: 24px;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        outline: none;
+        color: #fff;
+        background-color: #0415aa;
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 9px #01aaf8;
+    }
+</style>
+</head>
+<body>
+    
+<p id="testo2"><b>Marie Curie:</b>"Niente nella vita va temuto, va solo compreso. Ora è il momento di comprendere di più, affinché temiamo meno."</p> 
+  <button onclick="nascondiTesto2()">Nascondi </button> 
+
+<script>
+
+function nascondiTesto2() 
+{
+const testo = document.getElementById("testo2");
+testo.style.display = "none"; 
+} 
+</script>
+</body>
+</html>
+
+
+<style>
+    #MyButton3 {
+        display: inline-block;
+        padding: 15px 25px;
+        font-size: 24px;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        outline: none;
+        color: #fff;
+        background-color: #0415aa;
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 9px #01aaf8;
+    }
+</style>
+</head>
+<body>
+    
+<p id="testo3"><b>Richard Feynman:</b>"Se non riesci a spiegare qualcosa in modo semplice, significa che non l'hai capito abbastanza bene."</p> 
+  <button onclick="nascondiTesto3()">Nascondi </button> 
+
+<script>
+
+function nascondiTesto3() 
+{
+const testo = document.getElementById("testo3");
+testo.style.display = "none"; 
+} 
+</script>
+</body>
+</html>
+
+
+<style>
+    #MyButton4 {
+        display: inline-block;
+        padding: 15px 25px;
+        font-size: 24px;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        outline: none;
+        color: #fff;
+        background-color: #0415aa;
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 9px #01aaf8;
+    }
+</style>
+</head>
+<body>
+     
+<p id="testo4"><b>Isaac Newton:</b>"Se ho visto più lontano, è perché stavo sulle spalle di giganti."</p> 
+  <button onclick="nascondiTesto4()">Nascondi </button> 
+
+<script>
+
+function nascondiTesto4() 
+{
+const testo = document.getElementById("testo4");
+testo.style.display = "none"; 
+} 
+</script>
+</body>
+</html>
+
+
+<style>
+    #MyButton5 {
+        display: inline-block;
+        padding: 15px 25px;
+        font-size: 24px;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        outline: none;
+        color: #fff;
+        background-color: #0415aa;
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 9px #01aaf8;
+    }
+</style>
+</head>
+<body>
+     
+<p id="testo5"><b>Carl Sagan:</b>"In un universo infinito, l'umanità è una piccola e umile parte dell'intero cosmo. Ma, nonostante la nostra piccolezza, siamo capaci di conoscenza."</p> 
+  <button onclick="nascondiTesto5()">Nascondi </button> 
+
+<script>
+
+function nascondiTesto5() 
+{
+const testo = document.getElementById("testo5");
+testo.style.display = "none"; 
+} 
+</script>
+</body>
+</html>
