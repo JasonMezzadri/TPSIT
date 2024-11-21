@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcolatore della Media</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: left;
+            align-items: center;
+            height: 60vh;
+            background-color: #f4f4f9;
+            margin: 0;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 300px;
+            margin: 70px
+        }
+        h1 {
+            color: #333;
+        }
+        input {
+            margin: 10px;
+            padding: 8px;
+            font-size: 16px;
+            width: 80%;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            background-color: #2a2b2a;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #888a88;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Calcola la Media</h1>
+        
+        <!-- Campi di input per i numeri -->
+        <input type="number" id="num1" placeholder="Inserisci primo numero" step="any">
+        <input type="number" id="num2" placeholder="Inserisci secondo numero" step="any">
+        <input type="number" id="num3" placeholder="Inserisci terzo numero" step="any">
+
+        <!-- Bottone per avviare il calcolo -->
+        <button onclick="gestisciCalcolo()">Calcola Media</button>
+
+        <!-- Area per mostrare il risultato -->
+        <div id="result" class="result"></div>
+    </div>
+
+    <script>
+        // Funzione per calcolare la media accettando parametri
+        function calcolaMedia(a, b, c) {
+            return (a + b + c) / 3;
+        }
+
+        // Funzione per gestire gli input e mostrare il risultato
+        function gestisciCalcolo() {
+            // Leggi i valori degli input
+            const num1 = parseFloat(document.getElementById('num1').value);
+            const num2 = parseFloat(document.getElementById('num2').value);
+            const num3 = parseFloat(document.getElementById('num3').value);
+
+            // Controlla se i valori sono numeri validi
+            if (isNaN(num1) || isNaN(num2) || isNaN(num3)) {
+                document.getElementById('result').innerText = "Per favore, inserisci tutti i numeri.";
+                return;
+            }
+
+            // Calcola la media usando la funzione con parametri
+            const media = calcolaMedia(num1, num2, num3);
+
+            // Mostra il risultato
+            document.getElementById('result').innerText = `La media di Jason è: ${media.toFixed(2)}`;
+        }
+    </script>
+
+</body>
+</html>
