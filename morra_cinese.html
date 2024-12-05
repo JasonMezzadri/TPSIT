@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Morra cinese</title>
+</head>
+<body>
+    <h1>Morra: Giocatore vs Bot</h1>
+
+    <p>Scegli la tua mossa:</p>
+    <button onclick="gioca('sasso')">Sasso</button>
+    <button onclick="gioca('carta')">Carta</button>
+    <button onclick="gioca('forbice')">Forbice</button>
+
+    <h2>Risultati:</h2>
+    <p id="sceltaGiocatore">Giocatore ha scelto: </p>
+    <p id="sceltaBot">Bot ha scelto: </p>
+    <p id="risultato">Risultato: </p>
+
+    <script>
+        function gioca(mossaGiocatore) {
+            let morraArray = ["sasso", "carta", "forbice"];
+
+            let mossaBot = morraArray[Math.floor(Math.random() * 3)];
+
+            document.getElementById("sceltaGiocatore").innerHTML = "Giocatore ha scelto: " + mossaGiocatore;
+            document.getElementById("sceltaBot").innerHTML = "Bot ha scelto: " + mossaBot;
+
+            let risultato = "";
+            if (mossaGiocatore === mossaBot) {
+                risultato = "Pareggio!";
+            } else if (
+                (mossaGiocatore === "sasso" && mossaBot === "forbice") ||
+                (mossaGiocatore === "carta" && mossaBot === "sasso") ||
+                (mossaGiocatore === "forbice" && mossaBot === "carta")
+            ) {
+                risultato = "Hai vinto!";
+            } else {
+                risultato = "Hai perso!";
+            }
+
+            document.getElementById("risultato").innerHTML = risultato;
+        }
+    </script>
+</body>
+</html>
