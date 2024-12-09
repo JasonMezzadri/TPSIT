@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analisi Numerica</title>
+</head>
+<body>
+ <h1>100 i numeri casuali tra 1 e 100</h1>
+ <p><b>- Lista numeri:</b></p>
+ <p id="out1"></p>
+
+ <h1>100 numeri consecutivi tra 1 e 1000</h1>
+ <p><b>- Lista numeri:</b></p>
+ <p id="out2"></p>
+
+ <h1>10 numeri primi casuali</h1>
+ <p><b>- Lista numeri:</b></p>
+ <p id="out3"></p>
+
+ <p><b>- Lista numeri:</b></p>
+ <p id="out4"></p>
+
+ <p><b>- Lista numeri:</b></p>
+ <p id="out5"></p>
+
+ <p></p>
+
+    <script>
+
+        let numeri1=[];
+        function InserisciNumeroCasuale(i)
+        {
+            let numeroCasuale1=Math.floor(Math.random()*100);
+            numeri1[i]=numeroCasuale1;
+        }
+       for(let i=0;i<100;i++)
+        {
+            InserisciNumeroCasuale(i);
+        }
+        document.getElementById("out1").innerHTML=numeri1;
+
+
+        let numeri2=[];
+        let numeroCasuale2=Math.floor(Math.random()*900);
+
+       for(let i=0;i<100;i++)
+        {
+            numeri2.push(numeroCasuale2 + i);
+        }
+        document.getElementById("out2").innerHTML=numeri2;
+
+
+        let numeri3=[];
+        function Numeriprimi()
+        {
+            let numeroCasuale3=Math.floor(Math.random()*900);
+            if (numeroCasuale3 % 2 != 0) {
+                numeri3.push(numeroCasuale3)
+            }
+            else {
+                Numeriprimi()
+            }
+
+        }
+       for(let i=0;i<100;i++)
+        {
+            numeri3.push(numeroCasuale3 + i);
+        }
+        document.getElementById("out3").innerHTML=numeri3;
+           
+
+
+    </script>
+</body>
+</html>
