@@ -3,74 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Analisi Numerica</title>
+    <title>Analisi Numerica array1</title>
+    <style>
+        .esercizio {
+            border: 2px solid black;
+            padding: 10px;
+            margin: 10px;
+            width: 300px;
+            display: inline-block;
+            vertical-align: top;
+        }
+    </style>
 </head>
 <body>
- <h1>100 i numeri casuali tra 1 e 100</h1>
- <p><b>- Lista numeri:</b></p>
- <p id="out1"></p>
+ <h1>Analisi Numerica array1</h1>
+ <p> Imparo ad usare gli array con i numeri</p>
+ <p>Sviluppo algoritmi che inseriscono numeri particolari negli array</p>
 
- <h1>100 numeri consecutivi tra 1 e 1000</h1>
- <p><b>- Lista numeri:</b></p>
- <p id="out2"></p>
-
- <h1>10 numeri primi casuali</h1>
- <p><b>- Lista numeri:</b></p>
- <p id="out3"></p>
-
- <p><b>- Lista numeri:</b></p>
- <p id="out4"></p>
-
- <p><b>- Lista numeri:</b></p>
- <p id="out5"></p>
-
- <p></p>
+ <p>Lista numeri:</p>
 
     <script>
-
-        let numeri1=[];
-        function InserisciNumeroCasuale(i)
-        {
-            let numeroCasuale1=Math.floor(Math.random()*100);
-            numeri1[i]=numeroCasuale1;
-        }
-       for(let i=0;i<100;i++)
-        {
-            InserisciNumeroCasuale(i);
-        }
-        document.getElementById("out1").innerHTML=numeri1;
-
-
-        let numeri2=[];
-        let numeroCasuale2=Math.floor(Math.random()*900);
-
-       for(let i=0;i<100;i++)
-        {
-            numeri2.push(numeroCasuale2 + i);
-        }
-        document.getElementById("out2").innerHTML=numeri2;
-
-
-        let numeri3=[];
-        function Numeriprimi()
-        {
-            let numeroCasuale3=Math.floor(Math.random()*900);
-            if (numeroCasuale3 % 2 != 0) {
-                numeri3.push(numeroCasuale3)
+        // Funzione per determinare se un numero è primo
+        function IsPrime(n) {
+            for (let i = 2; i <= Math.sqrt(n); i++) {
+                if (n % i === 0) return false;
             }
-            else {
-                Numeriprimi()
-            }
-
+            return n > 1;
         }
-       for(let i=0;i<100;i++)
-        {
-            numeri3.push(numeroCasuale3 + i);
-        }
-        document.getElementById("out3").innerHTML=numeri3;
-           
-
-
     </script>
+
+    <!-- Esercizio 1 -->
+    <div class="esercizio">
+      <h3>Esercizio 1: 100 numeri casuali tra 1 e 100</h3>
+      <script>
+        let numeriCasuali = [];
+        for (let i = 0; i < 100; i++) {
+          numeriCasuali.push(Math.floor(Math.random() * 100) + 1);
+        }
+        document.write('<p>' + numeriCasuali.join(', ') + '</p>');
+      </script>
+    </div>
+
+    <!-- Esercizio 2 -->
+    <div class="esercizio">
+      <h3>Esercizio 2: 100 numeri consecutivi tra 1 e 1000</h3>
+      <script>
+        let numeriConsecutivi = [];
+        for (let i = 1; i <= 100; i++) {
+          numeriConsecutivi.push(i);
+        }
+        document.write('<p>' + numeriConsecutivi.join(', ') + '</p>');
+      </script>
+    </div>
+
+    <!-- Esercizio 3 -->
+    <div class="esercizio">
+      <h3>Esercizio 3: 10 numeri primi casuali</h3>
+      <script>
+        let numeriPrimiCasuali = [];
+        while (numeriPrimiCasuali.length < 10) {
+          let num = Math.floor(Math.random() * 100) + 1;
+          if (IsPrime(num)) {
+            numeriPrimiCasuali.push(num);
+          }
+        }
+        document.write('<p>' + numeriPrimiCasuali.join(', ') + '</p>');
+      </script>
+    </div>
+
+    <!-- Esercizio 4 -->
+    <div class="esercizio">
+      <h3>Esercizio 4: Numeri primi tra 1 e 100</h3>
+      <script>
+        let numeriPrimi = [];
+        for (let i = 2; i <= 100; i++) {
+          if (IsPrime(i)) {
+            numeriPrimi.push(i);
+          }
+        }
+        document.write('<p>' + numeriPrimi.join(', ') + '</p>');
+      </script>
+    </div>
+
+    <!-- Esercizio 5 -->
+    <div class="esercizio">
+      <h3>Esercizio 5: Numeri da 1 a 100 con i loro fattori</h3>
+      <script>
+        function getFactors(n) {
+          let factors = [];
+          for (let i = 1; i <= n; i++) {
+            if (n % i === 0) {
+              factors.push(i);
+            }
+          }
+          return factors.join(", ");
+        }
+
+        let fattoriNumeri = [];
+        for (let i = 1; i <= 100; i++) {
+          fattoriNumeri.push(`${i}: ${getFactors(i)}`);
+        }
+        document.write('<p>' + fattoriNumeri.join('<br>') + '</p>');
+      </script>
+    </div>
+
 </body>
 </html>
