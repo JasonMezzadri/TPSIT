@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proprietà dei Numeri</title>
+    <style>
+        .prime {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Proprietà dei Numeri da 1 a 10000</h1>
+    <div id="output">
+        <!-- Le informazioni verranno aggiunte qui tramite JavaScript -->
+    </div>
+
+    <script>
+        // Funzione per verificare se un numero è primo
+        function isPrime(num) {
+            if (num <= 1) return false;
+            for (let i = 2; i <= Math.sqrt(num); i++) {
+                if (num % i === 0) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        // Funzione che stampa le informazioni per un numero
+        function printNumberProperties(n) {
+            const outputDiv = document.getElementById('output');
+            let primeText = isPrime(n) ? 'Sì' : 'No';
+            let primeClass = isPrime(n) ? 'prime' : ''; // Colora di rosso se è primo
+
+            const content = `
+                <p class="${primeClass}">
+                    Numero: ${n} <br>
+                    Pari/Dispari: ${n % 2 === 0 ? 'Pari' : 'Dispari'} <br>
+                    Primo: ${primeText} <br>
+                    Doppio: ${n * 2} <br>
+                    Metà Intera: ${Math.floor(n / 2)} <br>
+                    Complemento (1000 - n): ${1000 - n} <br>
+                    Somma con Precedente e Successivo: ${n - 1} + ${n} + ${n + 1} = ${n - 1 + n + n + 1} <br>
+                    Moltiplicato per 3.14: ${(n * 3.14).toFixed(2)} <br>
+                    Moltiplicato per 2.71: ${(n * 2.71).toFixed(2)} <br><br>
+                </p>
+            `;
+            outputDiv.innerHTML += content;
+        }
+
+        // Esegui la funzione per i numeri da 1 a 10000
+        for (let i = 1; i <= 10000; i++) {
+            printNumberProperties(i);
+        }
+    </script>
+</body>
+</html>
