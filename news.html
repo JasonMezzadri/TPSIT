@@ -9,178 +9,36 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.topnav {
-  overflow: hidden;
-  background-color: #333;
-}
-
-.topnav a {
-  float: left;
-  display: block;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 17px;
-}
-
-.topnav a:hover {
-  background-color: #ddd;
-  color: black;
-}
-
-.topnav a.active {
-  background-color: #04AA6D;
-  color: white;
-}
-
-.topnav .icon {
-  display: none;
-}
-
-@media screen and (max-width: 600px) {
-  .topnav a:not(:first-child) {display: none;}
-  .topnav a.icon {
-    float: right;
-    display: block;
-  }
-}
-
-@media screen and (max-width: 600px) {
-  .topnav.responsive {position: relative;}
-  .topnav.responsive .icon {
-    position: absolute;
-    right: 0;
-    top: 0;
-  }
-  .topnav.responsive a {
-    float: none;
-    display: block;
-    text-align: left;
-  }
-}
-
-#news1 {
+#news1, #news2, #news3, #news4, #news5, #news6, #news7, #news8, #news9, #news10 {
   background-color: #cef0cf;
-        margin: 20px;
-        width: 800px;
-        height: 184px;
-        padding: 5px;
-        border: 5px solid #3d3d38;
-        display: flex;
-} 
-
-#news2 {
-  background-color: #cef0cf;
-        margin: 20px;
-        width: 800px;
-        height: 184px;
-        padding: 5px;
-        border: 5px solid #3d3d38;
-        display: flex;
-} 
-
-#news3 {
-  background-color: #cef0cf;
-        margin: 20px;
-        width: 800px;
-        height: 184px;
-        padding: 5px;
-        border: 5px solid #3d3d38;
-        display: flex;
-} 
-
-#news4 {
-  background-color: #cef0cf;
-        margin: 20px;
-        width: 800px;
-        height: 184px;
-        padding: 5px;
-        border: 5px solid #3d3d38;
-        display: flex;
+  margin: 20px;
+  width: 800px;
+  height: 184px;
+  padding: 5px;
+  border: 5px solid #3d3d38;
+  display: flex;
+  align-items: center;
 }
 
-#news5 {
-  background-color: #cef0cf;
-        margin: 20px;
-        width: 800px;
-        height: 184px;
-        padding: 5px;
-        border: 5px solid #3d3d38;
-        display: flex;
+#news1 img, #news2 img, #news3 img, #news4 img, #news5 img, #news6 img, #news7 img, #news8 img, #news9 img, #news10 img {
+  width: 300px;
+  height: 185px;
+  margin-right: 20px;
 }
 
-#news6 {
-  background-color: #cef0cf;
-        margin: 20px;
-        width: 800px;
-        height: 184px;
-        padding: 5px;
-        border: 5px solid #3d3d38;
-        display: flex;
-}
-
-#news7 {
-  background-color: #cef0cf;
-        margin: 20px;
-        width: 800px;
-        height: 184px;
-        padding: 5px;
-        border: 5px solid #3d3d38;
-        display: flex;
-}
-
-#news8 {
-  background-color: #cef0cf;
-        margin: 20px;
-        width: 800px;
-        height: 184px;
-        padding: 5px;
-        border: 5px solid #3d3d38;
-        display: flex;
-}
-
-#news9 {
-  background-color: #cef0cf;
-        margin: 20px;
-        width: 800px;
-        height: 184px;
-        padding: 5px;
-        border: 5px solid #3d3d38;
-        display: flex;
-}
-
-#news10 {
-  background-color: #cef0cf;
-        margin: 20px;
-        width: 800px;
-        height: 184px;
-        padding: 5px;
-        border: 5px solid #3d3d38;
-        display: flex;
+ol {
+  padding-left: 20px;
 }
 
 </style>
 </head>
 <body>
 
-<div class="topnav" id="myTopnav">
-  <a href="https://jasonmezzadri.github.io/TPSIT/index.html">Home</a>
-  <a class="active">News</a>
-  <a href="#java_script">Java Script</a> 
-  <a href="https://jasonmezzadri.github.io/TPSIT/flip_card_css.html">Flip_card_css</a>
-  <a href="https://jasonmezzadri.github.io/TPSIT/box.html">Box </a>
-  <a href="https://jasonmezzadri.github.io/TPSIT/DIV_css.html">DIV_css </a>
-  <a href="https://jasonmezzadri.github.io/TPSIT/schedapersonale.html">Scheda personale</a>
-  <a href="https://jasonmezzadri.github.io/TPSIT/primapagina.htm">Prima pagina</a>
-  <a href="javascript:void(0);" class="icon" onclick="myFunction()">
-    <i class="fa fa-bars"></i>
-  </a>
-</div>
+<!-- Barra di navigazione rimossa -->
 
 <div id="news1">
   <div>
-      <img src="https://www.avio.com/sites/avio.com/files/styles/articles/public/2021-07/Ariane_5_liftoff.jpg?itok=JJGUOqvo" style="width:300px;height:185px;">
+      <img src="https://www.avio.com/sites/avio.com/files/styles/articles/public/2021-07/Ariane_5_liftoff.jpg?itok=JJGUOqvo" alt="News Image">
   </div>
   <div>
       <ol>
@@ -193,7 +51,7 @@ body {
 
 <div id="news2">
   <div>
-      <img src="https://www.astrospace.it/wp-content/uploads/2022/09/Mars-Climate-Orbiter_0-768x468.jpg" style="width:300px;height:185px;">
+      <img src="https://www.astrospace.it/wp-content/uploads/2022/09/Mars-Climate-Orbiter_0-768x468.jpg" alt="News Image">
   </div>
   <div>
       <ol>
@@ -206,7 +64,7 @@ body {
 
 <div id="news3">
   <div>
-      <img src="https://static.lespresso.it/hero/521/ebd00beb-d80e-e3ef-07cf-2f1087fdd521.webp" style="width:300px;height:185px;">
+      <img src="https://static.lespresso.it/hero/521/ebd00beb-d80e-e3ef-07cf-2f1087fdd521.webp" alt="News Image">
   </div>
   <div>
       <ol>
@@ -219,7 +77,7 @@ body {
 
 <div id="news4">
   <div>
-      <img src="https://media.licdn.com/dms/image/v2/C4E12AQGqaRgJJ7iv4g/article-inline_image-shrink_400_744/article-inline_image-shrink_400_744/0/1520525102636?e=1731542400&v=beta&t=rk-fJQzVa2GFmoCt7plWOjKt7E0KhPl1BnPfG0humwI" style="width:300px;height:185px;">
+      <img src="immagine4.png" alt="News Image">
   </div>
   <div>
       <ol>
@@ -232,7 +90,7 @@ body {
 
 <div id="news5">
   <div>
-      <img src="https://staticfanpage.akamaized.net/wp-content/uploads/sites/34/2022/03/patriot-missile-lancio-1200x675.jpeg" style="width:300px;height:185px;">
+      <img src="https://staticfanpage.akamaized.net/wp-content/uploads/sites/34/2022/03/patriot-missile-lancio-1200x675.jpeg" alt="News Image">
   </div>
   <div>
       <ol>
@@ -245,7 +103,7 @@ body {
 
 <div id="news6">
   <div>
-      <img src="https://www.ilpost.it/wp-content/uploads/2019/12/millennium-bug-2.jpg" style="width:300px;height:185px;">
+      <img src="https://www.ilpost.it/wp-content/uploads/2019/12/millennium-bug-2.jpg" alt="News Image">
   </div>
   <div>
       <ol>
@@ -258,7 +116,7 @@ body {
 
 <div id="news7">
   <div>
-      <img src="https://pcrebuilding.altervista.org/images/thumbs_my_pcrebuilding/555b35db16f6c_p1120789_ss.jpg" style="width:300px;height:185px;">
+      <img src="https://pcrebuilding.altervista.org/images/thumbs_my_pcrebuilding/555b35db16f6c_p1120789_ss.jpg" alt="News Image">
   </div>
   <div>
       <ol>
@@ -271,7 +129,7 @@ body {
 
 <div id="news8">
   <div>
-      <img src="https://mobility.smartworld.it/images/2024/04/10/tesla-model-3_880x495.jpeg" style="width:300px;height:185px;">
+      <img src="https://mobility.smartworld.it/images/2024/04/10/tesla-model-3_880x495.jpeg" alt="News Image">
   </div>
   <div>
       <ol>
@@ -284,7 +142,7 @@ body {
 
 <div id="news9">
   <div>
-      <img src="https://thebrandhopper.com/wp-content/uploads/2023/03/att-title.jpg" style="width:300px;height:185px;">
+      <img src="https://thebrandhopper.com/wp-content/uploads/2023/03/att-title.jpg" alt="News Image">
   </div>
   <div>
       <ol>
@@ -297,27 +155,9 @@ body {
 
 <div id="news10">
   <div>
-      <img src="https://i0.wp.com/www.nlarenas.com/wp-content/uploads/boeing-737-MAX-sistema-MCAS.jpg?fit=1280%2C720&ssl=1" style="width:300px;height:185px;">
+      <img src="https://i0.wp.com/www.nlarenas.com/wp-content/uploads/boeing-737-MAX-sistema-MCAS.jpg?fit=1280%2C720&ssl=1" alt="News Image">
   </div>
   <div>
       <ol>
           <li>Oltre 20 miliardi di dollari, molte vite perse</li>
-          <li>Il sistema MCAS del Boeing 737 Max, progettato per correggere il comportamento di volo dell'aereo, aveva un bug che portava a una serie di incidenti aerei mortali. Questo errore portò alla perdita di controllo degli aerei in determinate situazioni, causando due incidenti fatali che uccisero 346 persone.</li>
-          <li>La Boeing subì gravi perdite economiche, danni alla reputazione e costi enormi per riparare il software e certificare nuovamente il modello. L’aereo fu bloccato a terra per quasi due anni.</li>
-      </ol>
-  </div>
-</div>
-
-<script>
-function myFunction() {
-  var x = document.getElementById("myTopnav");
-  if (x.className === "topnav") {
-    x.className += " responsive";
-  } else {
-    x.className = "topnav";
-  }
-}
-</script>
-
-</body>
-</html>
+          <li>Il sistema MCAS del Boeing 737 Max, progettato per correggere il comportamento di volo dell'aereo, aveva un bug che portava a una serie di incidenti aerei mortali. Questo errore portò alla perdita di controllo
