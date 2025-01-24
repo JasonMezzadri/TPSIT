@@ -6,76 +6,68 @@
     <title>McDonald's</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        /* Modifica per le card con colore soft */
         .card {
-            border-radius: 15px; /* Aggiungi bordi arrotondati */
-            background-color: #f0f8e1; /* Un colore soft verde chiaro che sta bene con i cibi */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombra morbida per effetto tridimensionale */
+            border-radius: 15px;
+            background-color: #f0f8e1;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         .card-img-top {
-            height: 200px; /* Impostiamo un'altezza uniforme per le immagini */
-            object-fit: cover; /* Rende l'immagine coprente senza deformarla */
-            border-top-left-radius: 15px; /* Arrotonda l'angolo superiore sinistro */
-            border-top-right-radius: 15px; /* Arrotonda l'angolo superiore destro */
+            height: 200px;
+            object-fit: cover;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
         }
 
-        /* Contenitori delle sezioni */
         .section {
             margin-bottom: 40px;
-            padding: 20px; /* Spaziatura interna per un effetto più morbido */
-            background-color: #faf3d3; /* Un colore soft giallo chiaro */
-            border: 2px solid #000; /* Contorno nero per il contenitore */
-            border-radius: 10px; /* Angoli arrotondati */
+            padding: 20px;
+            background-color: #faf3d3;
+            border: 2px solid #000;
+            border-radius: 10px;
         }
 
         .section-title {
-            text-align: left;
             font-size: 1.5rem;
             font-weight: bold;
             margin-bottom: 20px;
         }
 
-        /* Flexbox per disporre le card una affianco all'altra */
         .card-deck {
             display: flex;
-            justify-content: center; /* Centra le card nel contenitore */
-            flex-wrap: wrap; /* Permette alle card di andare a capo se non c'è spazio sufficiente */
-            gap: 70px; /* Spazio tra le card */
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 70px;
         }
 
-        /* Modifica per il bottone Ordina ora */
         .btn-ordina {
-            background-color: #2d784a; /* Verde McDonald's */
-            color: #ffcc00; /* Giallo come il logo */
+            background-color: #2d784a;
+            color: #ffcc00;
             font-weight: bold;
-            border-radius: 5px; /* Aggiungi angoli arrotondati al bottone */
-            padding: 10px 20px; /* Spaziatura interna del bottone */
-            transition: background-color 0.3s ease, transform 0.3s ease; /* Effetto hover */
+            border-radius: 5px;
+            padding: 10px 20px;
+            transition: background-color 0.3s, transform 0.3s;
         }
 
-        /* Hover effect per il bottone */
         .btn-ordina:hover {
-            background-color: #568766; /* Verde più scuro al passaggio del mouse */
-            transform: scale(1.05); /* Leggero ingrandimento al passaggio del mouse */
+            background-color: #568766;
+            transform: scale(1.05);
         }
 
-        /* Modifica colori navbar */
         .navbar {
-            background-color: #faf3d3; /* Verde McDonald's per la navbar */
+            background-color: #faf3d3;
         }
 
         .navbar .nav-link, .navbar .navbar-brand {
-            color: #0b0b0b !important; /* Colore giallo per i link e il brand */
+            color: #0b0b0b !important;
         }
 
         .navbar .nav-link.active {
-            font-weight: bold; /* Testo più forte per il link attivo */
+            font-weight: bold;
         }
 
-        /* Sposta il logo più a destra */
         .navbar-brand {
-            margin-left: 20px; /* Distanza maggiore per spostare il logo verso destra */
+            margin-left: 20px;
         }
     </style>
 </head>
@@ -84,61 +76,48 @@
         <a class="navbar-brand" href="#">
             <img src="logoMc.png" alt="Logo McDonald's" width="50">
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link active" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Menu</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Offerte</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Contatti</a>
-                </li>
+                <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Menu</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Offerte</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Contatti</a></li>
             </ul>
         </div>
     </nav>
 
     <div class="container my-5 text-center">
-        <h1 class="text-center">Prenditi una pausa!<br>Gusta le migliori prelibatezze del McDonald's</h1>
+        <h1>Prenditi una pausa!<br>Gusta le migliori prelibatezze del McDonald's</h1>
         <p class="lead">Dai un morso alla felicità con i nostri piatti irresistibili. Ordina ora e vivi l'esperienza McDonald's!</p>
-        
+
         <!-- Sezione Panini -->
         <div class="section">
             <h2 class="section-title">Panini</h2>
             <div class="card-deck">
-                <!-- Card 1 -->
-                <div class="card card-spacing" style="width: 18rem;">
+                <div class="card" style="width: 18rem;">
                     <img src="grancrispy.png" class="card-img-top" alt="Gran Crispy McBacon">
                     <div class="card-body">
                         <h5 class="card-title">Gran Crispy McBacon</h5>
-                        <p class="card-text">Un hamburger con un succulento petto di pollo impanato, bacon croccante, formaggio, lattuga e salsa maionese, il tutto racchiuso in un morbido panino.</p>
+                        <p class="card-text">Un hamburger con pollo impanato, bacon croccante, formaggio, lattuga e salsa maionese.</p>
                         <a href="#" class="btn btn-ordina">Ordina ora</a>
                     </div>
                 </div>
-
-                <!-- Card 2 -->
-                <div class="card card-spacing" style="width: 18rem;">
+                <div class="card" style="width: 18rem;">
                     <img src="bigmac.png" class="card-img-top" alt="BigMac">
                     <div class="card-body">
                         <h5 class="card-title">Big Mac</h5>
-                        <p class="card-text">Il leggendario panino con due hamburger di manzo, salsa speciale, lattuga, formaggio, cetrioli e cipolla, racchiusi in un panino con tre strati.</p>
+                        <p class="card-text">Due hamburger di manzo, salsa speciale, lattuga, formaggio, cetrioli e cipolla.</p>
                         <a href="#" class="btn btn-ordina">Ordina ora</a>
                     </div>
                 </div>
-
-                <!-- Card 3 -->
-                <div class="card card-spacing" style="width: 18rem;">
+                <div class="card" style="width: 18rem;">
                     <img src="mcchicken.png" class="card-img-top" alt="McChicken">
                     <div class="card-body">
                         <h5 class="card-title">McChicken</h5>
-                        <p class="card-text">Un panino con pollo impanato, insalata fresca e salsa maionese, per una combinazione di gusto semplice e deliziosa.</p>
+                        <p class="card-text">Panino con croccante pollo impanato, insalata fresca e salsa maionese.                     </p>
                         <a href="#" class="btn btn-ordina">Ordina ora</a>
                     </div>
                 </div>
@@ -149,32 +128,27 @@
         <div class="section">
             <h2 class="section-title">Patatine e Nuggets</h2>
             <div class="card-deck">
-                <!-- Card 4 -->
-                <div class="card card-spacing" style="width: 18rem;">
+                <div class="card" style="width: 18rem;">
                     <img src="patatine1.png" class="card-img-top" alt="Patatine classiche">
                     <div class="card-body">
                         <h5 class="card-title">Patatine classiche</h5>
-                        <p class="card-text">Croccanti e dorate, le patatine fritte McDonald's sono il contorno perfetto per ogni pasto.</p>
+                        <p class="card-text">Le patatine fritte McDonald's sono il contorno perfetto per ogni pasto.</p>
                         <a href="#" class="btn btn-ordina">Ordina ora</a>
                     </div>
                 </div>
-
-                <!-- Card 5 -->
-                <div class="card card-spacing" style="width: 18rem;">
+                <div class="card" style="width: 18rem;">
                     <img src="patatine2.png" class="card-img-top" alt="Patatine Cheese&Bacon">
                     <div class="card-body">
                         <h5 class="card-title">Patatine Cheese&Bacon</h5>
-                        <p class="card-text">Le patatine croccanti, condite con una saporita salsa al formaggio e striscioline di bacon croccante, per un tocco extra di gusto.</p>
+                        <p class="card-text">Patatine croccanti con salsa al formaggio e bacon croccante.</p>
                         <a href="#" class="btn btn-ordina">Ordina ora</a>
                     </div>
                 </div>
-
-                <!-- Card 6 -->
-                <div class="card card-spacing" style="width: 18rem;">
+                <div class="card" style="width: 18rem;">
                     <img src="nuggets.png" class="card-img-top" alt="Nuggets">
                     <div class="card-body">
                         <h5 class="card-title">Nuggets</h5>
-                        <p class="card-text">Teneri bocconcini di pollo impanati e fritti, perfetti da intingere nella tua salsa preferita.</p>
+                        <p class="card-text">Bocconcini di pollo impanati e fritti, perfetti con salsa.</p>
                         <a href="#" class="btn btn-ordina">Ordina ora</a>
                     </div>
                 </div>
@@ -185,32 +159,27 @@
         <div class="section">
             <h2 class="section-title">Altro</h2>
             <div class="card-deck">
-                <!-- Card 7 -->
-                <div class="card card-spacing" style="width: 18rem;">
+                <div class="card" style="width: 18rem;">
                     <img src="piadina.png" class="card-img-top" alt="McWrap">
                     <div class="card-body">
                         <h5 class="card-title">McWrap</h5>
-                        <p class="card-text">Un morbido wrap che avvolge pollo grigliato o croccante, insieme a verdure fresche, salsa e formaggio, per un pasto rapido e gustoso.</p>
+                        <p class="card-text">Wrap con pollo grigliato, verdure fresche, salsa e formaggio.</p>
                         <a href="#" class="btn btn-ordina">Ordina ora</a>
                     </div>
                 </div>
-
-                <!-- Card 8 -->
-                <div class="card card-spacing" style="width: 18rem;">
+                <div class="card" style="width: 18rem;">
                     <img src="toast.png" class="card-img-top" alt="Toast">
                     <div class="card-body">
                         <h5 class="card-title">Toast</h5>
-                        <p class="card-text">Fette di pane tostate, farcite con prosciutto e formaggio, per una pausa semplice e golosa.</p>
+                        <p class="card-text">Pane tostato con prosciutto e formaggio.</p>
                         <a href="#" class="btn btn-ordina">Ordina ora</a>
                     </div>
                 </div>
-
-                <!-- Card 9 -->
-                <div class="card card-spacing" style="width: 18rem;">
+                <div class="card" style="width: 18rem;">
                     <img src="insalata.png" class="card-img-top" alt="Insalata">
                     <div class="card-body">
                         <h5 class="card-title">Insalata</h5>
-                        <p class="card-text">Una fresca combinazione di verdure miste, ideale come contorno leggero o per accompagnare il tuo pasto.</p>
+                        <p class="card-text">Combinazione di verdure miste, leggera e fresca.</p>
                         <a href="#" class="btn btn-ordina">Ordina ora</a>
                     </div>
                 </div>
@@ -221,4 +190,3 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-
