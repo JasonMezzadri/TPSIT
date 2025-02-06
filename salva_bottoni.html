@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timer e Bottoni</title>
+    <style>
+        /* Impostazioni generali per il layout */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            width: 80%;
+            max-width: 1200px;
+        }
+
+        .button-column {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            width: 30%;
+        }
+
+        .output-column {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            width: 65%;
+            margin-left: 20px;
+            margin-top: 30px; /* Aggiungi un margine per far partire i risultati sotto i bottoni */
+        }
+
+        h1 {
+            color: #5a8f7d;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            text-align: center;
+            width: 100%;
+        }
+
+        button {
+            background-color: #6bbf7b;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            margin: 10px 0;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #4a9c64;
+        }
+
+        /* Colore verde più scuro per i bottoni Tempo */
+        .time-button {
+            background-color: #4a9c64;
+        }
+
+        .time-button:hover {
+            background-color: #387a52;
+        }
+
+        #timer, #output {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #5a8f7d;
+        }
+
+        #output div {
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+    </style>
+    <script>
+        let startTime = null;
+        let intervalId = null;
+
+        // Funzione che avvia il timer
+        function startTimer() {
+            startTime = Date.now(); // Memorizza l'ora di inizio
+            intervalId = setInterval(updateTimerDisplay, 10); // Avvia l'aggiornamento ogni 10ms
+        }
+
+        // Funzione per aggiornare il timer e visualizzare il tempo trascorso
+        function updateTimerDisplay() {
+            if (startTime) {
+                const elapsedTime = Date.now() - startTime; // Calcola il tempo trascorso
+                const seconds = Math.floor(elapsedTime / 1000);
+                const milliseconds = elapsedTime % 1000;
+                const deciseconds = Math.floor(milliseconds / 100);
+
+                document.getElementById('timer').innerHTML = `Tempo trascorso: ${seconds}s ${deciseconds}.${milliseconds}`;
+            }
+        }
+
+        // Funzione che mostra il tempo trascorso quando uno degli altri bottoni viene premuto
+        function showElapsedTime(buttonNumber) {
+            if (startTime) {
+                const elapsedTime = Date.now() - startTime; // Calcola il tempo trascorso
+                const seconds = Math.floor(elapsedTime / 1000);
+                const milliseconds = elapsedTime % 1000;
+                const deciseconds = Math.floor(milliseconds / 100);
+
+                const newEntry = document.createElement('div');
+                newEntry.innerHTML = `Bottone ${buttonNumber} premuto! Tempo trascorso: ${seconds}s ${deciseconds}.${milliseconds}`;
+                document.getElementById('output').appendChild(newEntry);
+            } else {
+                const newEntry = document.createElement('div');
+                newEntry.innerHTML = `Il timer non è stato avviato! Premi il primo bottone per farlo partire.`;
+                document.getElementById('output').appendChild(newEntry);
+            }
+        }
+
+        // Funzione che mostra la data e ora quando uno dei primi 4 bottoni viene premuto
+        function mostraDataOra(bottone) {
+            const now = new Date();
+            const dataOra = now.toLocaleString();  // Format data e ora
+            document.getElementById('output').innerHTML = `Bottone ${bottone} premuto! Data e Ora: ${dataOra}`;
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <!-- Colonna dei bottoni -->
+        <div class="button-column">
+            <h1>Timer e Data con 4 Bottoni</h1>
+            <!-- Bottone per Data/Ora (prima sezione) -->
+            <button onclick="mostraDataOra(1)">Bottone 1 - Data/Ora</button>
+            <button onclick="mostraDataOra(2)">Bottone 2 - Data/Ora</button>
+            <button onclick="mostraDataOra(3)">Bottone 3 - Data/Ora</button>
+            <button onclick="mostraDataOra(4)">Bottone 4 - Data/Ora</button>
+            
+            <!-- Bottone per Tempo (seconda sezione) -->
+            <button onclick="startTimer()">Avvia Timer</button>
+            <button class="time-button" onclick="showElapsedTime(1)">Bottone 1 - Tempo</button>
+            <button class="time-button" onclick="showElapsedTime(2)">Bottone 2 - Tempo</button>
+            <button class="time-button" onclick="showElapsedTime(3)">Bottone 3 - Tempo</button>
+        </div>
+
+        <!-- Colonna dei risultati -->
+        <div class="output-column">
+            <div id="timer"></div>
+            <div id="output"></div>
+        </div>
+    </div>
+</body>
+</html>
