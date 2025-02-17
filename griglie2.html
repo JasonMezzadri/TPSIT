@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cubo di Rubik</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr); /* 3 colonne */
+      gap: 5px; /* Spaziatura tra le celle */
+      margin: 20px;
+      width: 300px;
+      height: 300px;
+    }
+
+    .grid-item {
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      line-height: 100px;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 10px; /* Angoli arrotondati */
+      color: white;
+      border: black;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Griglia 3x3 (Cubo di Rubik)</h1>
+    <div class="grid-container">
+      <div class="grid-item" onclick="showMessage(1)" style="background-color: #ee2f0e;">Cella 1</div>
+      <div class="grid-item" onclick="showMessage(2)" style="background-color: #ff9900;">Cella 2</div>
+      <div class="grid-item" onclick="showMessage(3)" style="background-color: #ffee00;">Cella 3</div>
+      <div class="grid-item" onclick="showMessage(4)" style="background-color: #c3ff1e;">Cella 4</div>
+      <div class="grid-item" onclick="showMessage(5)" style="background-color: #2be262;">Cella 5</div>
+      <div class="grid-item" onclick="showMessage(6)" style="background-color: #14ffe0;">Cella 6</div>
+      <div class="grid-item" onclick="showMessage(7)" style="background-color: #00BFFF;">Cella 7</div>
+      <div class="grid-item" onclick="showMessage(8)" style="background-color: #054ce4;">Cella 8</div>
+      <div class="grid-item" onclick="showMessage(9)" style="background-color: #8214dc;">Cella 9</div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS and Popper.js -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+
+  <script>
+    // Funzione per mostrare un messaggio diverso per ogni cella
+    function showMessage(cellNumber) {
+      let message = "";
+
+      // Frasi diverse per ciascuna cella
+      switch(cellNumber) {
+        case 1:
+          message = "Hai cliccato sulla Cella 1!";
+          break;
+        case 2:
+          message = "Cella 2 cliccata, bravo!";
+          break;
+        case 3:
+          message = "Cella 3, bel colpo!";
+          break;
+        case 4:
+          message = "Cella 4, ottimo!";
+          break;
+        case 5:
+          message = "Cella 5, che scelta!";
+          break;
+        case 6:
+          message = "Cella 6, perfetto!";
+          break;
+        case 7:
+          message = "Hai scelto la Cella 7!";
+          break;
+        case 8:
+          message = "Cella 8, molto bene!";
+          break;
+        case 9:
+          message = "Cella 9, ottima scelta!";
+          break;
+        default:
+          message = "Errore!";
+          break;
+      }
+
+      // Mostra il messaggio in un alert
+      alert(message);
+    }
+  </script>
+</body>
+</html>
