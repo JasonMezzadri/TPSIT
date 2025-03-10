@@ -1,69 +1,157 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sviluppo di un Gioco Memory Sequenziale con Bootstrap 5 e JavaScript</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <title>Game Memory Color</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .griglia-pulsanti {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            grid-gap: 10px;
+            justify-content: center;
+            margin-top: 50px;
+        }
+
+        .btn-memory {
+            width: 100px;
+            height: 100px;
+            font-size: 24px;
+            border-radius: 10px;
+            transition: background-color 0.3s;
+        }
+
+        .btn-memory[data-index="0"] { background-color: #e74c3c; } 
+        .btn-memory[data-index="1"] { background-color: #3498db; } 
+        .btn-memory[data-index="2"] { background-color: #2ecc71; } 
+        .btn-memory[data-index="3"] { background-color: #f39c12; } 
+        .btn-memory[data-index="4"] { background-color: #9b59b6; } 
+        .btn-memory[data-index="5"] { background-color: #1abc9c; } 
+        .btn-memory[data-index="6"] { background-color: #34495e; } 
+        .btn-memory[data-index="7"] { background-color: #16a085; }
+        .btn-memory[data-index="8"] { background-color: #f1c40f; }
+
+        .evidenziato {
+            opacity: 0.7;
+            transform: scale(1.1);
+        }
+
+        .disabilitato {
+            pointer-events: none;
+        }
+    </style>
 </head>
-<style>
-    .btn{
-        width:100px;
-        height: 100px;
-        margin-bottom: 5px;
-        border: 3px solid black;
-        background-color: none;
-    }
-
-    .col{
-        margin: 0px;
-        padding: 0px;
-    }
-
-    .row{
-        margin: 0 auto;
-        max-width: 330px;
-    }
-
-    .container{
-        height: 100vh auto;
-        align-items: center;
-    }
-</style>
-<body>
+<body class="bg-light">
     <div class="container text-center">
-        <div class="row row-cols-3">
-          <div class="col">
-            <button class="btn btn-primary" style="background-color: red;"></button>
-          </div>
-          <div class="col">
-            <button class="btn btn-primary" style="background-color: orange;"></button>
-          </div>
-          <div class="col">
-            <button class="btn btn-primary" style="background-color: yellow;"></button>
-          </div>
-          <div class="col">
-            <button class="btn btn-primary" style="background-color: lightgreen;"></button>
-          </div>
-          <div class="col">
-            <button class="btn btn-primary" style="background-color: green;"></button>
-          </div>
-          <div class="col">
-            <button class="btn btn-primary" style="background-color: lightblue;"></button>
-          </div>
-          <div class="col">
-            <button class="btn btn-primary" style="background-color: blue;"></button>
-          </div>
-          <div class="col">
-            <button class="btn btn-primary" style="background-color: purple;"></button>
-          </div>
-          <div class="col">
-            <button class="btn btn-primary" style="background-color: pink;"></button>
-          </div>
+        <h1 class="mt-5">Game Memory Color</h1>
+        <button id="btnInizia" class="btn btn-primary mt-4">Start</button>
+        <div id="statoGioco" class="mt-3"></div>
+        <div id="punteggio" class="mt-2"></div>
+        <div id="grigliaPulsanti" class="griglia-pulsanti mt-5">
+            <button class="btn btn-memory" data-index="0"></button>
+            <button class="btn btn-memory" data-index="1"></button>
+            <button class="btn btn-memory" data-index="2"></button>
+            <button class="btn btn-memory" data-index="3"></button>
+            <button class="btn btn-memory" data-index="4"></button>
+            <button class="btn btn-memory" data-index="5"></button>
+            <button class="btn btn-memory" data-index="6"></button>
+            <button class="btn btn-memory" data-index="7"></button>
+            <button class="btn btn-memory" data-index="8"></button>
         </div>
+    </div>
 
-    
+    <script src="js/bootstrap.min.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const btnInizia = document.getElementById('btnInizia');
+            const statoGioco = document.getElementById('statoGioco');
+            const tabellonePunteggio = document.getElementById('punteggio');
+            const grigliaPulsanti = document.getElementById('grigliaPulsanti');
+
+            let sequenza = [];
+            let sequenzaUtente = [];
+            let punteggio = 0;
+            let giocoAttivo = false;
+
+            const iniziaGioco = () => {
+                punteggio = 0;
+                sequenzaUtente = [];
+                sequenza = [];
+                statoGioco.textContent = '';
+                tabellonePunteggio.textContent = `Punteggio: ${punteggio}`;
+                giocoAttivo = true;
+                btnInizia.classList.add('disabilitato');
+                aggiungiPassoSequenza();
+            };
+
+            const aggiungiPassoSequenza = () => {
+                const nuovoPasso = Math.floor(Math.random() * 9);
+                sequenza.push(nuovoPasso);
+                riproduciSequenza();
+            };
+
+            const riproduciSequenza = () => {
+                let indice = 0;
+                const intervallo = setInterval(() => {
+                    evidenziaPulsante(sequenza[indice]);
+                    indice++;
+                    if (indice >= sequenza.length) {
+                        clearInterval(intervallo);
+                        abilitaPulsanti();
+                        statoGioco.textContent = 'La tua volta!';
+                    }
+                }, 1000);
+            };
+
+            const evidenziaPulsante = (indice) => {
+                const btn = grigliaPulsanti.querySelector(`[data-index='${indice}']`);
+                btn.classList.add('evidenziato');
+                setTimeout(() => {
+                    btn.classList.remove('evidenziato');
+                }, 500);
+            };
+
+            const gestisciClickUtente = (e) => {
+                if (!giocoAttivo) return;
+                const indiceCliccato = e.target.dataset.index;
+                sequenzaUtente.push(Number(indiceCliccato));
+
+                if (sequenzaUtente[sequenzaUtente.length - 1] !== sequenza[sequenzaUtente.length - 1]) {
+                    terminaGioco();
+                } else if (sequenzaUtente.length === sequenza.length) {
+                    punteggio++;
+                    tabellonePunteggio.textContent = `Punteggio: ${punteggio}`;
+                    sequenzaUtente = [];
+                    statoGioco.textContent = 'Corretto! Nuova sequenza in arrivo...';
+                    disabilitaPulsanti();
+                    setTimeout(aggiungiPassoSequenza, 1000);
+                }
+            };
+
+            const disabilitaPulsanti = () => {
+                const pulsanti = grigliaPulsanti.querySelectorAll('.btn-memory');
+                pulsanti.forEach(btn => btn.classList.add('disabilitato'));
+            };
+
+            const abilitaPulsanti = () => {
+                const pulsanti = grigliaPulsanti.querySelectorAll('.btn-memory');
+                pulsanti.forEach(btn => btn.classList.remove('disabilitato'));
+            };
+
+            const terminaGioco = () => {
+                giocoAttivo = false;
+                statoGioco.textContent = `Hai perso! Il tuo punteggio finale è: ${punteggio}`;
+                btnInizia.classList.remove('disabilitato');
+            };
+
+            grigliaPulsanti.querySelectorAll('.btn-memory').forEach(btn => {
+                btn.addEventListener('click', gestisciClickUtente);
+            });
+
+            btnInizia.addEventListener('click', iniziaGioco);
+        });
+    </script>
 </body>
 </html>
