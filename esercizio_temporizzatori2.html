@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Movimento di un Quadrato</title>
+  <style>
+    #container {
+      width: 400px;
+      height: 400px;
+      position: relative;
+    }
+    #square {
+      width: 50px;
+      height: 50px;
+      background-color: lightseagreen;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Movimento in senso ORARIO di un Quadrato</h2>
+<div id="container">
+  <div id="square"></div>
+</div>
+
+<script>
+  const square = document.getElementById("square");
+  const containerSize = 400;
+  const squareSize = 50;
+  let x = 0, y = 0;
+  let direction = "right";
+
+  function moveSquare() {
+    switch (direction) {
+      case "right":
+        x += 2;
+        if (x >= containerSize - squareSize) direction = "down";
+        break;
+      case "down":
+        y += 2;
+        if (y >= containerSize - squareSize) direction = "left";
+        break;
+      case "left":
+        x -= 2;
+        if (x <= 0) direction = "up";
+        break;
+      case "up":
+        y -= 2;
+        if (y <= 0) direction = "right";
+        break;
+    }
+    square.style.left = x + "px";
+    square.style.top = y + "px";
+  }
+
+  setInterval(moveSquare, 10);
+</script>
+</body>
+</html>

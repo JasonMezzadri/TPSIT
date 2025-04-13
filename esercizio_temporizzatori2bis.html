@@ -1,0 +1,72 @@
+<<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Scorrimento dei Quadrati</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    h2 {
+      font-family: "Courier New", Courier, monospace;
+      color: #333;
+    }
+
+    #row {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .square {
+      width: 50px;
+      height: 50px;
+      background-color: yellow;
+      transition: background-color 0.4s;
+      border-radius: 2px;
+      border: 2px solid black;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Scorrimento dei Quadrati</h2>
+<div id="row"></div>
+
+<script>
+  const row = document.getElementById("row");
+  const total = 8;
+  let squares = [];
+
+  for (let i = 0; i < total; i++) {
+    const div = document.createElement("div");
+    div.classList.add("square");
+    row.appendChild(div);
+    squares.push(div);
+  }
+
+  let completed = 0;
+
+  function moveOneSquare() {
+    if (completed >= total) return;
+
+    let i = 0;
+
+    const interval = setInterval(() => {
+      if (i > 0) squares[i - 1].style.backgroundColor = "yellow";
+      squares[i].style.backgroundColor = "red";
+      i++;
+
+      if (i > total - 1 - completed) {
+        clearInterval(interval);
+        completed++;
+        setTimeout(moveOneSquare, 800); 
+      }
+    }, 600); 
+  }
+
+  moveOneSquare();
+</script>
+</body>
+</html>
