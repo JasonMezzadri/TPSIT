@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Gioco di Reazione</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #e3f2fd;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+
+    h1 {
+      margin-top: 20px;
+      color: #333;
+    }
+
+    #startBtn {
+      padding: 12px 24px;
+      font-size: 18px;
+      background-color: #42a5f5;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+      margin-top: 10px;
+    }
+
+    #startBtn:hover {
+      background-color: #1e88e5;
+    }
+
+    #timer {
+      font-size: 24px;
+      color: #333;
+      margin: 20px 0 10px;
+      font-weight: bold;
+    }
+
+    #gameArea {
+      width: 600px;
+      height: 400px;
+      background-color: #ffffffdd;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      position: relative;
+      margin: 30px auto;
+      overflow: hidden;
+    }
+
+    #circle {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background-color: red;
+      position: absolute;
+      display: none;
+      box-shadow: 0 0 10px rgba(255, 0, 0, 0.6);
+      cursor: pointer;
+      transition: transform 0.1s;
+    }
+
+    #circle:hover {
+      transform: scale(1.1);
+    }
+
+    #result {
+      margin-top: 15px;
+      font-size: 20px;
+      color: #222;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Gioco di Reazione - Clicca il Cerchio!</h1>
+  <button id="startBtn" onclick="startGame()">Inizia</button>
+  <div id="timer">Tempo: -- ms</div>
+  <div id="gameArea">
+    <div id="circle"></div>
+  </div>
+  <div id="result"></div>
+
+  <script>
+    const circle = document.getElementById("circle");
+    const timer = document.getElementById("timer");
+    const result = document.getElementById("result");
+    const gameArea = document.getElementById("gameArea");
+
+    let startTime, timerInterval;
+
+    function startGame() {
+      result.textContent = "";
+      timer.textContent = "Tempo: ...";
+      setTimeout(() => {
+        const x = Math.random() * (gameArea.clientWidth - 60);
+        const y = Math.random() * (gameArea.clientHeight - 60);
+        circle.style.left = x + "px";
+        circle.style.top = y + "px";
+        circle.style.display = "block";
+        startTime = Date.now();
+        timerInterval = setInterval(() => {
+          timer.textContent = "Tempo: " + (Date.now() - startTime) + " ms";
+        }, 16);
+      }, Math.random() * 2000 + 1000); // attesa 1–3 sec
+    }
+
+    circle.onclick = () => {
+      const reaction = Date.now() - startTime;
+      clearInterval(timerInterval);
+      timer.textContent = "Tempo: " + reaction + " ms";
+      result.textContent = "✅ Hai cliccato in " + reaction + " ms";
+      circle.style.display = "none";
+    };
+  </script>
+
+</body>
+</html>
