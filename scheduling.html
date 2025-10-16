@@ -1,0 +1,195 @@
+import json
+from collections import deque
+
+def fifo(tasks):
+    tasks = sorted(tasks, key=lambda x: x['arrival'])
+    current_time = 0
+    results = []
+    
+    for task in tasks:
+        if current_time < task['arrival']:
+            current_time = task['arrival']
+        start_time = current_time
+        finish_time = start_time + task['burst']
+        turnaround = finish_time - task['arrival']
+        waiting = turnaround - task['burst']
+        current_time = finish_time
+        
+        results.append({
+            'id': task['id'],
+            'start': start_time,
+            'finish': finish_time,
+            'turnaround': turnaround,
+            'waiting': waiting
+        })
+    return results
+
+def sjf(tasks):
+    tasks = sorted(tasks, key=lambda x: x['arrival'])
+    n = len(tasks)
+    completed = 0
+    current_time = 0
+    visited = [False]*n
+    results = []
+    
+    while completed < n:
+        # scegli il processo arrivato con burst più piccolo
+        idx = -1
+        min_burst = float('inf')
+        for i, t in enumerate(tasks):
+            if t['arrival'] <= current_time and not visited[i]:
+                if t['burst'] < min_burst:
+                    min_burst = t['burst']
+                    idx = i
+        if idx == -1:
+            current_time += 1
+            continue
+        
+        start_time = current_time
+        finish_time = start_time + tasks[idx]['burst']
+        turnaround = finish_time - tasks[idx]['arrival']
+        waiting = turnaround - tasks[idx]['burst']
+        current_time = finish_time
+        visited[idx] = True
+        completed += 1
+        
+        results.append({
+            'id': tasks[idx]['id'],
+            'start': start_time,
+            'finish': finish_time,
+            'turnaround': turnaround,
+            'waiting': waiting
+        })
+    return results
+
+def priority_scheduling(tasks):
+    tasks = sorted(tasks, key=lambda x: x['arrival'])
+    n = len(tasks)
+    completed = 0
+    current_time = 0
+    visited = [False]*n
+    results = []
+    
+    while completed < n:
+        idx = -1
+        highest_priority = float('inf')  # priorità bassa = numero alto
+        for i, t in enumerate(tasks):
+            if t['arrival'] <= current_time and not visited[i]:
+                if t['priority'] < highest_priority:
+                    highest_priority = t['priority']
+                    idx = i
+        if idx == -1:
+            current_time += 1
+            continue
+        
+        start_time = current_time
+        finish_time = start_time + tasks[idx]['burst']
+        turnaround = finish_time - tasks[idx]['arrival']
+        waiting = turnaround - tasks[idx]['burst']
+        current_time = finish_time
+        visited[idx] = True
+        completed += 1
+        
+        results.append({
+            'id': tasks[idx]['id'],
+            'start': start_time,
+            'finish': finish_time,
+            'turnaround': turnaround,
+            'waiting': waiting
+        })
+    return results
+
+def round_robin(tasks, quantum):
+    tasks = sorted(tasks, key=lambda x: x['arrival'])
+    n = len(tasks)
+    remaining = {t['id']: t['burst'] for t in tasks}
+    arrival = {t['id']: t['arrival'] for t in tasks}
+    queue = deque()
+    current_time = 0
+    results = []
+    completed = set()
+    start_times = {}
+    finish_times = {}
+    
+    # inserisco i processi arrivati all'inizio
+    i = 0
+    while i < n and tasks[i]['arrival'] <= current_time:
+        queue.append(tasks[i]['id'])
+        i += 1
+    
+    if not queue and i < n:
+        current_time = tasks[i]['arrival']
+        queue.append(tasks[i]['id'])
+        i += 1
+    
+    while queue:
+        pid = queue.popleft()
+        if pid not in start_times:
+            start_times[pid] = current_time
+        
+        run_time = min(quantum, remaining[pid])
+        remaining[pid] -= run_time
+        current_time += run_time
+        
+        # Aggiungo i processi arrivati durante l'esecuzione
+        while i < n and tasks[i]['arrival'] <= current_time:
+            queue.append(tasks[i]['id'])
+            i += 1
+        
+        if remaining[pid] > 0:
+            queue.append(pid)
+        else:
+            finish_times[pid] = current_time
+            completed.add(pid)
+    
+    for t in tasks:
+        tat = finish_times[t['id']] - t['arrival']
+        wait = tat - t['burst']
+        results.append({
+            'id': t['id'],
+            'start': start_times[t['id']],
+            'finish': finish_times[t['id']],
+            'turnaround': tat,
+            'waiting': wait
+        })
+    return results
+
+def run_algorithms(json_input):
+    data = json.loads(json_input)
+    tasks = data['tasks']
+    algorithms = data['algorithms']
+    quantum = data.get('round_robin_quantum', 2)
+    
+    output = {}
+    
+    for algo in algorithms:
+        if algo == "FIFO":
+            output['FIFO'] = fifo(tasks)
+        elif algo == "SJF":
+            output['SJF'] = sjf(tasks)
+        elif algo == "Priority":
+            output['Priority'] = priority_scheduling(tasks)
+        elif algo == "RoundRobin":
+            output['RoundRobin'] = round_robin(tasks, quantum)
+        else:
+            output[algo] = f"Algoritmo {algo} non implementato."
+    
+    return output
+
+if __name__ == "__main__":
+    input_json = '''
+    {
+      "tasks": [
+        {"id": "P1", "arrival": 0, "burst": 5, "priority": 2},
+        {"id": "P2", "arrival": 1, "burst": 3, "priority": 1},
+        {"id": "P3", "arrival": 2, "burst": 8, "priority": 3},
+        {"id": "P4", "arrival": 3, "burst": 6, "priority": 2}
+      ],
+      "algorithms": ["FIFO", "SJF", "Priority", "RoundRobin"],
+      "round_robin_quantum": 2
+    }
+    '''
+    
+    results = run_algorithms(input_json)
+    import pprint
+    pprint.pprint(results)
