@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Simulatore Scheduling CPU</title>
+<style>
+  body { font-family: Arial, sans-serif; margin: 20px; background: #f9f9f9; }
+  textarea { width: 100%; height: 150px; font-family: monospace; font-size: 14px; }
+  button { padding: 10px 20px; margin: 10px 0; font-size: 16px; cursor: pointer; }
+  table { border-collapse: collapse; margin-top: 20px; width: 100%; }
+  th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+  th { background: #eee; }
+  h2 { margin-top: 40px; }
+  .error { color: red; }
+</style>
+</head>
+<body>
+
+<h1>Simulatore di algoritmi di Scheduling CPU</h1>
+
+<p>Inserisci un JSON con i task e gli algoritmi da testare. Esempio:</p>
+<pre>
+{
+  "tasks": [
+    {"id": "P1", "arrival": 0, "burst": 5, "priority": 2},
+    {"id": "P2", "arrival": 1, "burst": 3, "priority": 1},
+    {"id": "P3", "arrival": 2, "burst": 8, "priority": 3},
+    {"id": "P4", "arrival": 3, "burst": 6, "priority": 2}
+  ],
+  "algorithms": ["FIFO", "SJF", "Priority", "RoundRobin"],
+  "round_robin_quantum": 2
+}
+</pre>
+
+<textarea id="inputJson"></textarea>
+<button onclick="runScheduling()">Esegui simulazione</button>
+
+<div id="results"></div>
+
+<script>
+// Algoritmi di scheduling in JS
+function fifo(tasks) {
+  let sorted = tasks.slice().sort((a,b) => a.arrival - b.arrival);
+  let currentTime = 0;
+  let results = [];
+  for (let t of sorted) {
+    if (currentTime < t.arrival) currentTime = t.arrival;
+    let start = currentTime;
+    let finish = start + t.burst;
+    let turnaround = finish - t.arrival;
+    let waiting = turnaround - t.burst;
+    currentTime = finish;
+    results.push({id: t.id, start, finish, turnaround, waiting});
+  }
+  return results;
+}
+
+function sjf(tasks) {
+  let n = tasks.length;
+  let completed = 0;
+  let currentTime = 0;
+  let visited = new Array(n).fill(false);
+  let results = [];
+  let sorted = tasks.slice().sort((a,b) => a.arrival - b.arrival);
+
+  while (completed < n) {
+    let idx = -1;
+    let minBurst = Infinity;
+    for (let i = 0; i < n; i++) {
+      if (!visited[i] && sorted[i].arrival <= currentTime && sorted[i].burst < minBurst) {
+        minBurst = sorted[i].burst;
+        idx = i;
+      }
+    }
+    if (idx === -1) {
+      currentTime++;
+      continue;
+    }
+    let t = sorted[idx];
+    let start = currentTime;
+    let finish = start + t.burst;
+    let turnaround = finish - t.arrival;
+    let waiting = turnaround - t.burst;
+    currentTime = finish;
+    visited[idx] = true;
+    completed++;
+    results.push({id: t.id, start, finish, turnaround, waiting});
+  }
+  return results;
+}
+
+function priorityScheduling(tasks) {
+  let n = tasks.length;
+  let completed = 0;
+  let currentTime = 0;
+  let visited = new Array(n).fill(false);
+  let results = [];
+  let sorted = tasks.slice().sort((a,b) => a.arrival - b.arrival);
+
+  while (completed < n) {
+    let idx = -1;
+    let highestPriority = Infinity;
+    for (let i = 0; i < n; i++) {
+      if (!visited[i] && sorted[i].arrival <= currentTime && sorted[i].priority < highestPriority) {
+        highestPriority = sorted[i].priority;
+        idx = i;
+      }
+    }
+    if (idx === -1) {
+      currentTime++;
+      continue;
+    }
+    let t = sorted[idx];
+    let start = currentTime;
+    let finish = start + t.burst;
+    let turnaround = finish - t.arrival;
+    let waiting = turnaround - t.burst;
+    currentTime = finish;
+    visited[idx] = true;
+    completed++;
+    results.push({id: t.id, start, finish, turnaround, waiting});
+  }
+  return results;
+}
+
+function roundRobin(tasks, quantum) {
+  let sorted = tasks.slice().sort((a,b) => a.arrival - b.arrival);
+  let n = tasks.length;
+  let remaining = {};
+  let arrival = {};
+  for (let t of sorted) {
+    remaining[t.id] = t.burst;
+    arrival[t.id] = t.arrival;
+  }
+  let queue = [];
+  let currentTime = 0;
+  let results = [];
+  let completed = new Set();
+  let startTimes = {};
+  let finishTimes = {};
+  let i = 0;
+
+  while (i < n && sorted[i].arrival <= currentTime) {
+    queue.push(sorted[i].id);
+    i++;
+  }
+  if (queue.length === 0 && i < n) {
+    currentTime = sorted[i].arrival;
+    queue.push(sorted[i].id);
+    i++;
+  }
+
+  while (queue.length > 0) {
+    let pid = queue.shift();
+    if (!(pid in startTimes)) startTimes[pid] = currentTime;
+
+    let runTime = Math.min(quantum, remaining[pid]);
+    remaining[pid] -= runTime;
+    currentTime += runTime;
+
+    while (i < n && sorted[i].arrival <= currentTime) {
+      queue.push(sorted[i].id);
+      i++;
+    }
+
+    if (remaining[pid] > 0) {
+      queue.push(pid);
+    } else {
+      finishTimes[pid] = currentTime;
+      completed.add(pid);
+    }
+  }
+
+  for (let t of sorted) {
+    let tat = finishTimes[t.id] - t.arrival;
+    let wait = tat - t.burst;
+    results.push({id: t.id, start: startTimes[t.id], finish: finishTimes[t.id], turnaround: tat, waiting: wait});
+  }
+  return results;
+}
+
+function createTable(results) {
+  let html = `<table><thead>
+    <tr>
+      <th>Task</th><th>Start</th><th>Finish</th><th>Turnaround</th><th>Waiting</th>
+    </tr>
+  </thead><tbody>`;
+  for (let r of results) {
+    html += `<tr>
+      <td>${r.id}</td><td>${r.start}</td><td>${r.finish}</td><td>${r.turnaround}</td><td>${r.waiting}</td>
+    </tr>`;
+  }
+  html += '</tbody></table>';
+  return html;
+}
+
+function runScheduling() {
+  let input = document.getElementById('inputJson').value;
+  let outputDiv = document.getElementById('results');
+  outputDiv.innerHTML = '';
+  let data;
+  try {
+    data = JSON.parse(input);
+  } catch(e) {
+    outputDiv.innerHTML = `<p class="error">Errore nel parsing JSON: ${e.message}</p>`;
+    return;
+  }
+
+  if (!data.tasks || !Array.isArray(data.tasks)) {
+    outputDiv.innerHTML = `<p class="error">Il JSON deve contenere un array "tasks"</p>`;
+    return;
+  }
+  if (!data.algorithms || !Array.isArray(data.algorithms)) {
+    outputDiv.innerHTML = `<p class="error">Il JSON deve contenere un array "algorithms"</p>`;
+    return;
+  }
+
+  let quantum = data.round_robin_quantum || 2;
+  let resultsHTML = '';
+
+  for (let algo of data.algorithms) {
+    resultsHTML += `<h2>Algoritmo: ${algo}</h2>`;
+    let res;
+    switch(algo) {
+      case 'FIFO':
+        res = fifo(data.tasks);
+        resultsHTML += createTable(res);
+        break;
+      case 'SJF':
+        res = sjf(data.tasks);
+        resultsHTML += createTable(res);
+        break;
+      case 'Priority':
+        res = priorityScheduling(data.tasks);
+        resultsHTML += createTable(res);
+        break;
+      case 'RoundRobin':
+        res = roundRobin(data.tasks, quantum);
+        resultsHTML += createTable(res);
+        break;
+      default:
+        resultsHTML += `<p>Algoritmo "${algo}" non implementato.</p>`;
+    }
+  }
+
+  outputDiv.innerHTML = resultsHTML;
+}
+
+// Precarica JSON esempio all'apertura
+document.getElementById('inputJson').value = `{
+  "tasks": [
+    {"id": "P1", "arrival": 0, "burst": 5, "priority": 2},
+    {"id": "P2", "arrival": 1, "burst": 3, "priority": 1},
+    {"id": "P3", "arrival": 2, "burst": 8, "priority": 3},
+    {"id": "P4", "arrival": 3, "burst": 6, "priority": 2}
+  ],
+  "algorithms": ["FIFO", "SJF", "Priority", "RoundRobin"],
+  "round_robin_quantum": 2
+}`;
+</script>
+
+</body>
+</html>
